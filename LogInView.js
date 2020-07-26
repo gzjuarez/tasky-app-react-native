@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Button, Text, Input} from 'react-native-elements';
+import {Button,Input, Text} from 'react-native-elements';
+import {  StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import {useAuth} from './AuthProvider';
 
 // This view has an input for email and password and logs in the user when the
@@ -14,8 +15,11 @@ export function LogInView() {
   const [authMode, setAuthMode] = useState('Login');
 
   return (
-    <>
-      <Text h3>{authMode}</Text>
+    <View style={styles.container}>
+      
+      <ToogleFamilyMembers setAuthMode={setAuthMode} authMode={authMode} />
+
+      <Text style={styles.loginText}>{authMode}</Text>
       <Input
         autoCapitalize="none"
         placeholder="email"
@@ -27,6 +31,7 @@ export function LogInView() {
         onChangeText={setPassword}
       />
       <Button
+        buttonStyle={{backgroundColor: '#00b5b8'}}
         onPress={async () => {
           console.log(`${authMode} button pressed with email ${email}`);
           setError(null);
@@ -49,16 +54,40 @@ export function LogInView() {
       />
       <Text>{error}</Text>
       <ToggleAuthModeComponent setAuthMode={setAuthMode} authMode={authMode} />
-    </>
+      
+    </View>
   );
 }
+
+const ToogleFamilyMembers = ({authMode, setAuthMode}) => {
+  if (authMode === 'Login') {
+    return (
+      <>
+      <View style={styles.title}>
+        <Text style={styles.darkText}>Family </Text>
+        <Text style={styles.lightText}>Members</Text>
+      </View>
+      <View style={styles.myButtonG}>
+        <View style={styles.myButton1}></View>
+        <View style={styles.myButton2}></View>
+        
+      </View>
+      </>
+    );
+  } else {
+    return (
+      <></>
+    );
+  }
+};
 
 const ToggleAuthModeComponent = ({authMode, setAuthMode}) => {
   if (authMode === 'Login') {
     return (
       <Button
-        title="Haven't created an account yet? Register"
-        type="outline"
+        title="Create New Account"
+        type="clear"
+        buttonStyle={{color: 'red'}}
         onPress={async () => {
           setAuthMode('Register');
         }}
@@ -68,7 +97,7 @@ const ToggleAuthModeComponent = ({authMode, setAuthMode}) => {
     return (
       <Button
         title="Have an account already? Login"
-        type="outline"
+        type="clear"
         onPress={async () => {
           setAuthMode('Login');
         }}
@@ -76,3 +105,57 @@ const ToggleAuthModeComponent = ({authMode, setAuthMode}) => {
     );
   }
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#d8d9da',
+    alignItems: "stretch",
+    justifyContent: 'center',
+    borderRadius:30,
+    width: '100%',
+    height: '100%',
+    paddingRight: 15,
+    paddingLeft: 15,
+  },
+  title:{
+    flex:1,
+    flexDirection:'row',
+    marginTop:40,
+  },
+  darkText:{
+    color:"#000000",
+    fontSize:20,
+  },
+  lightText:{
+    color:"#93988f",
+    fontSize:20,
+  },
+  loginText:{
+    color:"#000000",
+    fontSize:20,
+    flexDirection:'row',
+  },
+  myButtonG:{
+    flex:4,
+    //backgroundColor:'#00b5b8',
+    //alignItems: "stretch",
+    flexDirection: 'row',
+    flexWrap:'wrap',
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-start',
+    alignContent: 'space-around',
+
+  },
+  myButton1:{
+    height: 100,
+    width: 100,  //The Width must be the same as the height
+    borderRadius:200, //Then Make the Border Radius twice the size of width or Height
+    backgroundColor:'#00b5b8',
+  },
+  myButton2:{
+    height: 100,
+    width: 100,
+    borderRadius:200,
+    backgroundColor:'#f7c035',
+  }
+});

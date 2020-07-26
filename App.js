@@ -1,5 +1,6 @@
 import React from 'react';
 import {SafeAreaView, View, StatusBar} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {Button} from 'react-native-elements';
 import {useAuth} from './AuthProvider';
 import {LogInView} from './LogInView';
@@ -30,7 +31,7 @@ function AppBody() {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <View>
+        <View style={styles.container}>
           {user == null ? (
             <LogInView />
           ) : (
@@ -43,5 +44,15 @@ function AppBody() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingRight: 15,
+    paddingLeft: 15,
+  }
+});
+
 
 export default App;
