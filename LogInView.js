@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button,Input, Text} from 'react-native-elements';
-import {  StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {useAuth} from './AuthProvider';
 
 // This view has an input for email and password and logs in the user when the

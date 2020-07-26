@@ -35,7 +35,7 @@ function AppBody() {
           {user == null ? (
             <LogInView />
           ) : (
-            <TasksProvider projectId="My Project">
+            <TasksProvider projectId="Home">
               <TasksView />
             </TasksProvider>
           )}

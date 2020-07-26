@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Overlay, Input, Button} from 'react-native-elements';
+import {Overlay, Input, Button, Icon} from 'react-native-elements';
 import {useTasks} from './TasksProvider';
 
 // The AddTaskView is a button for adding tasks. When the button is pressed, an
@@ -35,9 +35,11 @@ export function AddTaskView() {
           />
         </>
       </Overlay>
-      <Button
-        type="outline"
-        title="Add Task"
+      <Icon
+        raised
+        name='add'
+        type='material'
+        color='#93988f'
         onPress={() => {
           setOverlayVisible(true);
         }}
