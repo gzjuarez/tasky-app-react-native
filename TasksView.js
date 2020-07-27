@@ -22,7 +22,14 @@ export function TasksView() {
       
 
       {/* <Text h2>{projectId}</Text> */}
-      <View style={styles.myButton1}></View>
+      <View style={styles.myButton1}>
+        <Text
+          style={{color:'#00b8'}}
+          onPress={logOut}>
+            Profile
+        </Text>
+        {/* <Button buttonStyle={{backgroundColor: '#00b5b8'}} style={{color:'#00b5b8'}} type="clear" title="Profile" onPress={logOut} /> */}
+      </View>
 
       <ScrollView style={styles.taskList}>
         {tasks.map(task => (
@@ -76,5 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#00b5b8',
     alignSelf: 'center',
     marginBottom: 20,
+    justifyContent:'center',
+    alignItems:'center',
   },
 });
