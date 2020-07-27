@@ -56,13 +56,36 @@ export function AddTaskView() {
             placeholder="Do not forget to sort your toys..."
             //onChangeText={(text) => setNewTaskName(text)}
           />
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Icon
+              raised
+              reverse
+              name='trash'
+              type='evilicon'
+              color='#00b5b8'
+            />
+            <Icon
+              raised
+              reverse
+              name='restaurant'
+              type='material'
+              color='#00b5b8'
+            />
+            <Icon
+              raised
+              reverse
+              name='pencil'
+              type='evilicon'
+              color='#00b5b8'
+            />
+          </View>
+
           <Button
             title="Create"
+            type="clear"
             onPress={() => {
               setOverlayVisible(false);
-
               createTask(newTaskName);
-
             }}
           />
         </>

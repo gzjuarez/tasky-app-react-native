@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     //justifyContent:'center',
     //alignSelf:'center'
     //alignContent:'flex-start'
-    marginHorizontal: 100
+    marginHorizontal: 60
   },
   myButtonG:{
     flex:4,

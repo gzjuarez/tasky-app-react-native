@@ -103,8 +103,8 @@ export function TaskItem({task}) {
         }
         leftIcon={
           task.status === Task.STATUS_COMPLETE ? (
-            { name: 'restaurant', type: 'material', color:'#93988f' }
-          ) : { name: 'restaurant', type: 'material', color:'#00b5b8' }
+            { name: 'restaurant', type: 'material', color:'#93988f', reverse:false }
+          ) : { name: 'restaurant', type: 'material', color:'#00b5b8', reverse:false }
         }
       />
     </>
