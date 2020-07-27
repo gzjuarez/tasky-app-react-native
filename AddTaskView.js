@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import {Overlay, Input, Button, Icon, Text} from 'react-native-elements';
+import NumericInput from 'react-native-numeric-input'
+
 import {useTasks} from './TasksProvider';
 
 // The AddTaskView is a button for adding tasks. When the button is pressed, an
@@ -41,9 +43,23 @@ export function AddTaskView() {
           </View>
 
           <Text>Which chore you want to add?</Text>
-          <Text>Specify the rpize and describe the chore</Text>
-
-          
+          <Text>Specify the prize and describe the chore</Text>
+              
+          <View style={{alignItems: 'center', margin:25}}>
+            <NumericInput
+              onChange={value => console.log(value)}
+              rounded
+              textColor='#59656F'
+              iconStyle={{ color: 'white' }}
+              rightButtonBackgroundColor='#00b5b8'
+              leftButtonBackgroundColor='#00b8'
+              minValue={0}
+              valueType="integer"
+              totalWidth={150}
+              totalHeight={60}
+              style={{alignItems: 'center'}}
+            />
+          </View>
 
           <Input
             label="Name"

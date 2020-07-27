@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 15,
     paddingTop: 15,
-    flexDirection:'column'
+    flexDirection:'column',
   },
   taskList:{
     marginTop:40,
