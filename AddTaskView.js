@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Overlay, Input, Button, Icon} from 'react-native-elements';
+import {View} from 'react-native';
+import {Overlay, Input, Button, Icon, Text} from 'react-native-elements';
 import {useTasks} from './TasksProvider';
 
 // The AddTaskView is a button for adding tasks. When the button is pressed, an
@@ -19,10 +20,41 @@ export function AddTaskView() {
         overlayStyle={{width: '90%'}}
         onBackdropPress={() => setOverlayVisible(false)}>
         <>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Icon
+              raised
+              name='navigate-before'
+              type='material'
+              onPress={() => {
+                setOverlayVisible(false);
+              }}
+            />
+            <Icon
+              raised
+              name='check'
+              type='material'
+              onPress={() => {
+                setOverlayVisible(false);
+                createTask(newTaskName);
+              }}
+            />
+          </View>
+
+          <Text>Which chore you want to add?</Text>
+          <Text>Specify the rpize and describe the chore</Text>
+
+          
+
           <Input
-            placeholder="New Task Name"
+            label="Name"
+            placeholder="Clean your bedroom"
             onChangeText={(text) => setNewTaskName(text)}
             autoFocus={true}
+          />
+          <Input
+            label="Description"
+            placeholder="Do not forget to sort your toys..."
+            //onChangeText={(text) => setNewTaskName(text)}
           />
           <Button
             title="Create"

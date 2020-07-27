@@ -55,11 +55,13 @@ const styles = StyleSheet.create({
   },
   taskList:{
     marginTop:40,
+    //justifyContent:'center',
+    //alignSelf:'center'
+    //alignContent:'flex-start'
+    marginHorizontal: 100
   },
   myButtonG:{
     flex:4,
-    //backgroundColor:'#00b5b8',
-    //alignItems: "stretch",
     flexDirection: 'row',
     flexWrap:'wrap',
     justifyContent: 'space-evenly',

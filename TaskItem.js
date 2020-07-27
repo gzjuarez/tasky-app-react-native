@@ -71,16 +71,6 @@ export function TaskItem({task}) {
       },
     });
   }
-  if (task.status !== Task.STATUS_IN_PROGRESS) {
-    actions.push({
-
-      title: 'Mark In Progress',
-
-      action: () => {
-        setTaskStatus(task, Task.STATUS_IN_PROGRESS);
-      },
-    });
-  }
   if (task.status !== Task.STATUS_COMPLETE) {
     actions.push({
 
@@ -105,13 +95,16 @@ export function TaskItem({task}) {
           setActionSheetVisible(true);
         }}
         title={task.name}
-        bottomDivider
-        checkmark={
+        containerStyle={{backgroundColor: '#d8d9da'}}
+        titleStyle={
           task.status === Task.STATUS_COMPLETE ? (
-            <Text>&#10004; {/* checkmark */}</Text>
-          ) : task.status === Task.STATUS_IN_PROGRESS ? (
-            <Text>In Progress</Text>
-          ) : null
+              {color: '#93988f'}
+          ) : {color: '#00b5b8'}
+        }
+        leftIcon={
+          task.status === Task.STATUS_COMPLETE ? (
+            { name: 'restaurant', type: 'material', color:'#93988f' }
+          ) : { name: 'restaurant', type: 'material', color:'#00b5b8' }
         }
       />
     </>
