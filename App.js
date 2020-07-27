@@ -1,12 +1,12 @@
 import React from 'react';
 import {SafeAreaView, View, StatusBar} from 'react-native';
 import { StyleSheet } from 'react-native';
-import {Button} from 'react-native-elements';
 import {useAuth} from './AuthProvider';
 import {LogInView} from './LogInView';
 import {AuthProvider} from './AuthProvider';
 import {TasksProvider} from './TasksProvider';
 import {TasksView} from './TasksView';
+import { ProfileView } from './ProfileView';
 
 const App = () => {
   return (
@@ -25,7 +25,7 @@ const App = () => {
 // within an AuthProvider.
 function AppBody() {
 
-  const {user, logOut} = useAuth();
+  const {user, logOut, currentView} = useAuth();
 
   return (
     <>
@@ -36,7 +36,12 @@ function AppBody() {
             <LogInView />
           ) : (
             <TasksProvider projectId="Home">
-              <TasksView />
+              {(currentView == "TasksView") ?
+                (<TasksView />)
+                :
+                (<ProfileView />)
+              }
+              
             </TasksProvider>
           )}
         </View>

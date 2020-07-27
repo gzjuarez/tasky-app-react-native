@@ -10,7 +10,7 @@ import {AddTaskView} from './AddTaskView';
 // It has a button to log out and a button to add a new task.
 export function TasksView() {
   // Get the logOut function from the useAuth hook.
-  const {logOut} = useAuth();
+  const {logOut, changeView} = useAuth();
 
   // Get the list of tasks and the projectId from the useTasks hook.
 
@@ -25,10 +25,11 @@ export function TasksView() {
       <View style={styles.myButton1}>
         <Text
           style={{color:'#00b8'}}
-          onPress={logOut}>
+          onPress={
+            () => changeView('ProfileView')
+          }>
             Profile
         </Text>
-        {/* <Button buttonStyle={{backgroundColor: '#00b5b8'}} style={{color:'#00b5b8'}} type="clear" title="Profile" onPress={logOut} /> */}
       </View>
 
       <ScrollView style={styles.taskList}>

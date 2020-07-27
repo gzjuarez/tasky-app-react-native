@@ -41,6 +41,11 @@ const AuthProvider = ({children}) => {
       console.log(`Registering as ${email}...`);
       await app.auth.emailPassword.registerEmail(email, password);
     };
+
+    const [currentView, setView] = useState('TasksView');
+    const changeView = (view) => {
+      setView(view);
+    };
   
     return (
       <AuthContext.Provider
@@ -49,6 +54,8 @@ const AuthProvider = ({children}) => {
           logOut,
           registerUser,
           user,
+          changeView,
+          currentView
         }}>
         {children}
       </AuthContext.Provider>
