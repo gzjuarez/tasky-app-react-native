@@ -106,4 +106,4 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 
-.env
+env*

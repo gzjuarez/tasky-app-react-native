@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "env:dev": "node scripts/set-environment.js development"
   },
   "dependencies": {
     "react": "16.13.1",
