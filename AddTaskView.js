@@ -26,20 +26,24 @@ export function AddTaskView() {
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Icon
               raised
+              reverse
               name='navigate-before'
               type='material'
               onPress={() => {
                 setOverlayVisible(false);
               }}
+              color='#93988f'
             />
             <Icon
               raised
+              reverse
               name='check'
               type='material'
               onPress={() => {
                 setOverlayVisible(false);
                 createTask(newTaskName, newTaskPoint);
               }}
+              color='#5FD6AB'
             />
           </View>
 
@@ -52,8 +56,8 @@ export function AddTaskView() {
               rounded
               textColor='#59656F'
               iconStyle={{ color: 'white' }}
-              rightButtonBackgroundColor='#00b5b8'
-              leftButtonBackgroundColor='#00b8'
+              rightButtonBackgroundColor='#5FD6AB'
+              leftButtonBackgroundColor='#919FEE'
               minValue={0}
               valueType="integer"
               totalWidth={150}
@@ -73,27 +77,21 @@ export function AddTaskView() {
             placeholder="Do not forget to sort your toys..."
             //onChangeText={(text) => setNewTaskName(text)}
           />
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
             <Icon
-              raised
-              reverse
               name='trash'
               type='evilicon'
-              color='#00b5b8'
+              color='#93988f'
             />
             <Icon
-              raised
-              reverse
               name='restaurant'
               type='material'
-              color='#00b5b8'
+              color='black'
             />
             <Icon
-              raised
-              reverse
               name='pencil'
               type='evilicon'
-              color='#00b5b8'
+              color='#93988f'
             />
           </View>
 

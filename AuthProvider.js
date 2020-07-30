@@ -17,24 +17,24 @@ const AuthProvider = ({children}) => {
         'name': 'gerajuarez',
         'email': 'gerajuarez@itesm.mx',
         'total_points': 4,
-        'color': '#9cc9ad'
+        'color': '#5FD6AB'
       },
       '5f22edfbe08f6af1b528d50d': {
         'name': 'fernandaz',
         'email': 'fernandaz@mail.com',
         'total_points': 10,
-        'color': '#f7c035'
+        'color': '#F2D269'
       },
       '5f22ee56b22a2a77f9931cd4': {
         'name': 'juanner',
         'email': 'juanner@gmail.com',
         'total_points': 5,
-        'color': '#a4cafd'
+        'color': '#E39376'
       }
     }  
     const [user, setUser] = useState(null);
     const [db, setDB] = useState(hardcoded_users);
-    const [hd_colors, setHDColors] = useState(['#00b5b8', '#f7c035', '#00b8']);
+    const [hd_colors, setHDColors] = useState(['#5FD6AB', '#F2D269', '#919FEE']);
 
     
   
@@ -69,10 +69,10 @@ const AuthProvider = ({children}) => {
 
     const getCurentUserColor = () => {
       if (db[user.identity]) {
-        return db[user.identity].color || '#00b5b8'
+        return db[user.identity].color || '#5FD6AB'
       }
       else
-        return '#00b5b8'
+        return '#5FD6AB'
     };
 
     const getCurentUserPoints = () => {

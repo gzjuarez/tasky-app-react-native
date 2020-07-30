@@ -31,7 +31,7 @@ export function LogInView() {
         onChangeText={setPassword}
       />
       <Button
-        buttonStyle={{backgroundColor: '#00b5b8'}}
+        buttonStyle={{backgroundColor: '#5FD6AB'}}
         containerStyle={{
           marginBottom:-20
         }}
@@ -161,30 +161,31 @@ const styles = StyleSheet.create({
   },
   myButtonG:{
     flex:5,
-    //backgroundColor:'#00b5b8',
+    //backgroundColor:'#5FD6AB',
     flexDirection: 'row',
     flexWrap:'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'flex-start',
     alignContent: 'space-around',
+    paddingHorizontal:10
 
   },
   myButton1:{
     height: 100,
     width: 100,  //The Width must be the same as the height
     borderRadius:200, //Then Make the Border Radius twice the size of width or Height
-    backgroundColor:'#00b5b8',
+    backgroundColor:'#5FD6AB',
   },
   myButton2:{
     height: 100,
     width: 100,
     borderRadius:200,
-    backgroundColor:'#f7c035',
+    backgroundColor:'#F2D269',
   },
   myButton3:{
     height: 100,
     width: 100,  //The Width must be the same as the height
     borderRadius:200, //Then Make the Border Radius twice the size of width or Height
-    backgroundColor:'#00b8',
+    backgroundColor:'#919FEE',
   },
 });

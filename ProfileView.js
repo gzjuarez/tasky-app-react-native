@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
       height: 150,
       width: 150,
       borderRadius:300, 
-      backgroundColor:'#00b5b8',
+      backgroundColor:'#5FD6AB',
       alignSelf: 'center',
       marginTop: 40,
       justifyContent:'center',
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
       fontFamily: 'sans-serif-light'
     },
     points:{
-      color:"#00b8",
+      color:"#919FEE",
       fontSize:50,
       fontFamily: 'monospace'
     },
