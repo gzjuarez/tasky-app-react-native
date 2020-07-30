@@ -32,6 +32,9 @@ export function LogInView() {
       />
       <Button
         buttonStyle={{backgroundColor: '#00b5b8'}}
+        containerStyle={{
+          marginBottom:-20
+        }}
         onPress={async () => {
           console.log(`${authMode} button pressed with email ${email}`);
           setError(null);
@@ -84,14 +87,31 @@ const ToogleFamilyMembers = ({authMode, setAuthMode}) => {
 const ToggleAuthModeComponent = ({authMode, setAuthMode}) => {
   if (authMode === 'Login') {
     return (
+      <View style={{flexDirection: 'row', alignContent: 'flex-start', paddingBottom:50}}>
+      <Text style={{
+        color:"#000000",
+        fontFamily: 'sans-serif-light',
+        fontSize:15,
+        marginTop:10
+      }}
+      onPress={async () => {
+        setAuthMode('Register');
+      }}
+      >Create</Text>
       <Button
-        title="Create New Account"
+        title="New Account"
         type="clear"
         buttonStyle={{color: 'red'}}
         onPress={async () => {
           setAuthMode('Register');
         }}
+        titleStyle={{
+          color:'#93988f',
+          fontFamily: 'sans-serif-light',
+          fontSize:15
+        }}
       />
+      </View>
     );
   } else {
     return (
@@ -140,12 +160,11 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif-light'
   },
   myButtonG:{
-    flex:4,
+    flex:5,
     //backgroundColor:'#00b5b8',
-    //alignItems: "stretch",
     flexDirection: 'row',
     flexWrap:'wrap',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     alignItems: 'flex-start',
     alignContent: 'space-around',
 
