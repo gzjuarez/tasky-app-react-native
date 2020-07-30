@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
 import Realm from 'realm';
 import {useAuth} from './AuthProvider';
-import {Task, User} from './schemas';
+import {Task} from './schemas';
 
 // Create the context that will be provided to descendants of TasksProvider via
 // the useTasks hook.
@@ -9,11 +9,10 @@ const TasksContext = React.createContext(null);
 
 const TasksProvider = ({children, projectId}) => {
     // Get the user from the AuthProvider context.
-    const {user} = useAuth();
+    const {user, setUser} = useAuth();
   
     // The tasks list will contain the tasks in the realm when opened.
     const [tasks, setTasks] = useState([]);
-    const [users, setUsers] = useState([]);
   
     // This realm does not need to be a state variable, because we don't re-render
     // on changing the realm.
@@ -35,7 +34,7 @@ const TasksProvider = ({children, projectId}) => {
     // partition value. This will open a realm that contains all objects where
     // object._partition == projectId.
     const config = {
-      schema: [Task.schema, User.schema],
+      schema: [Task.schema],
       sync: {
         user,
         partitionValue: projectId,
@@ -68,14 +67,11 @@ const TasksProvider = ({children, projectId}) => {
         // configuration above, the realm only contains tasks where
         // task._partition == projectId.
         const syncTasks = openedRealm.objects('Task');
-        const syncUsers = openedRealm.objects('User');
-        console.log(syncUsers)
 
         // Watch for changes to the tasks collection.
         openedRealm.addListener('change', () => {
           // On change, update the tasks state variable and re-render.
           setTasks([...syncTasks]);
-          setUsers([...syncUsers]);
         });
 
         // Set the tasks state variable and re-render.
@@ -145,18 +141,17 @@ const TasksProvider = ({children, projectId}) => {
     realm.write(() => {
 
       task.status = status;
-      user.total_points = user.total_points || 0;
-      if (status === Task.STATUS_COMPLETE) {
-        user.total_points += task.points;
-      } else if (status === Task.STATUS_OPEN) {
-        user.total_points -= task.points;
-        if (user.total_points < 0) {
-          user.total_points = 0;
-        }
-      }
-
     });
-    console.log(user)
+
+    user.total_points = user.total_points || 0;  
+    if (status === Task.STATUS_COMPLETE) {
+      user.total_points += task.points;
+    } else if (status === Task.STATUS_OPEN) {
+      user.total_points -= task.points;
+      if (user.total_points < 0) {
+        user.total_points = 0;
+      }
+    }
   };
 
   // Define the function for deleting a task.
@@ -184,7 +179,6 @@ const TasksProvider = ({children, projectId}) => {
         setTaskStatus,
         tasks,
         projectId,
-        users,
 
       }}>
 

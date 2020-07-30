@@ -12,18 +12,19 @@ const AuthContext = React.createContext(null);
 // AuthContext value to its descendants. Components under an AuthProvider can
 // use the useAuth() hook to access the auth value.
 const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null);
-    const [db, setDB] = useState({});
-    const [hd_colors, setHDColoirs] = useState(['#00b5b8', '#f7c035', '#00b8']);
-
     const hardcoded_users = {
-      'd': {
-        'name': '',
-        'email': '',
-        'total_points': 0,
-        'color': '#'
-      },
-    }
+      '5f22e81e4ac29c60609e4378': {
+        'name': 'gerajuarez',
+        'email': 'gerajuarez@itesm.mx',
+        'total_points': 4,
+        'color': '#9cc9ad'
+      }
+    }  
+    const [user, setUser] = useState(null);
+    const [db, setDB] = useState(hardcoded_users);
+    const [hd_colors, setHDColors] = useState(['#00b5b8', '#f7c035', '#00b8']);
+
+    
   
     // The log in function takes an email and password and uses the Email/Password
     // authentication provider to log in.
@@ -32,21 +33,21 @@ const AuthProvider = ({children}) => {
       const creds = Realm.Credentials.emailPassword(email, password);
       const newUser = await app.logIn(creds);
       console.log(`Logged in as ${newUser.identity}`);
-      if (!newUser.identity in db) {
-        console.log('new')
-      } else {
+      if (newUser.identity in db) {
         console.log('old')
+      } else {
+        console.log('new')
+        console.log(newUser.identity)
+        let newDB = db;
+        let createdUser = {
+          name: email.split('@')[0],
+          email: email,
+          total_points: 0,
+          color: hd_colors[getRandomInt()]
+        }
+        newDB[newUser.identity] = createdUser;
+        setDB(newDB);
       }
-      let newDB = db;
-      let createdUser = {
-        name: email.split('@')[0],
-        email: email,
-        total_points: 0,
-        color: hd_colors[getRandomInt()]
-      }
-      newDB[newUser.identity] = createdUser;
-      setDB(newDB);
-      console.log(db);
       setUser(newUser);
     };
 

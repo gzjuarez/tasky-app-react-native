@@ -32,29 +32,4 @@ class Task {
   };
 }
 
-class User {
-  constructor({
-    name,
-    partition,
-    id = new ObjectId(),
-    total_points,
-  }) {
-    this._partition = partition;
-    this._id = id;
-    this.name = name;
-    this.total_points = total_points;
-  }
-
-  static schema = {
-    name: 'User',
-    properties: {
-      _id: 'objectId',
-      _partition: 'string',
-      name: 'string',
-      points: 'int',
-    },
-    primaryKey: '_id',
-  };
-}
-
-export {Task, User};
+export {Task};
