@@ -6,7 +6,7 @@ import {useTasks} from './TasksProvider';
 import {AdMobBanner} from 'react-native-admob';
 
 export function ProfileView() {
-    const {logOut, changeView, user, getCurentUser} = useAuth();
+    const {logOut, changeView, user, getCurentUser, getCurentUserColor} = useAuth();
     const {tasks, projectId} = useTasks();
 
     const onFailToRecieveAd = (error) => console.log(error);
@@ -27,21 +27,12 @@ export function ProfileView() {
             height: 150,
             width: 150,
             borderRadius:300, 
-            backgroundColor: '#00b5b8',//getCurentUser(),
+            backgroundColor: getCurentUserColor(),
             alignSelf: 'center',
             marginTop: 40,
             justifyContent:'center',
             alignItems:'center',
           }}>
-            <Text
-              style={{color:'#00b5b8'}}
-              onPress={
-                () => {
-                  changeView('TasksView')
-                }
-              }>
-                Profile
-            </Text>
           </View>
           <View style={styles.title}>
             <Text style={styles.darkText}>Hi </Text>

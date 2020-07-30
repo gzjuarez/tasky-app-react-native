@@ -14,8 +14,8 @@ const AuthContext = React.createContext(null);
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [db, setDB] = useState({});
+    const [hd_colors, setHDColoirs] = useState(['#00b5b8', '#f7c035', '#00b8']);
 
-    const hd_colors = ['#00b5b8', '#f7c035', '#00b8']
     const hardcoded_users = {
       'd': {
         'name': '',
@@ -31,9 +31,12 @@ const AuthProvider = ({children}) => {
       console.log(`Logging in as ${email}...`);
       const creds = Realm.Credentials.emailPassword(email, password);
       const newUser = await app.logIn(creds);
-      setUser(newUser);
       console.log(`Logged in as ${newUser.identity}`);
-
+      if (!newUser.identity in db) {
+        console.log('new')
+      } else {
+        console.log('old')
+      }
       let newDB = db;
       let createdUser = {
         name: email.split('@')[0],
@@ -42,12 +45,22 @@ const AuthProvider = ({children}) => {
         color: hd_colors[getRandomInt()]
       }
       newDB[newUser.identity] = createdUser;
-      setDB(newDB)
-      //console.log('hey')
+      setDB(newDB);
+      console.log(db);
+      setUser(newUser);
     };
 
     const getCurentUser = () => {
       return db[user.identity].name
+    };
+
+    const getCurentUserColor = () => {
+      console.log(db[user.identity])
+      if (db[user.identity]) {
+        return db[user.identity].color || '#00b5b8'
+      }
+      else
+        return '#00b5b8'
     };
   
     // Log out the current user.
@@ -78,11 +91,11 @@ const AuthProvider = ({children}) => {
     }
 
     const getRandomInt = () => {
-      min = 0;
-      max = 2;
+      let min = 0;
+      let max = 12;
       min = Math.ceil(min);
       max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+      return (Math.floor(Math.random() * (max - min + 1)) + min) % 3;
     }
   
     return (
@@ -95,7 +108,8 @@ const AuthProvider = ({children}) => {
           changeView,
           currentView,
           addPoints,
-          getCurentUser
+          getCurentUser,
+          getCurentUserColor
         }}>
         {children}
       </AuthContext.Provider>

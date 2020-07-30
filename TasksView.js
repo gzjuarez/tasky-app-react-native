@@ -12,7 +12,7 @@ import { paymentRequest } from 'react-native-paypal';
 // It has a button to log out and a button to add a new task.
 export function TasksView() {
   // Get the logOut function from the useAuth hook.
-  const {logOut, changeView, user} = useAuth();
+  const {logOut, changeView, getCurentUserColor} = useAuth();
 
   // Get the list of tasks and the projectId from the useTasks hook.
 
@@ -66,21 +66,20 @@ export function TasksView() {
   return (
     <View style={styles.container}>
       
-
-      {/* <Text h2>{projectId}</Text> */}
-      <View style={styles.myButton1}>
-        <Text
-          style={{color:'#00b5b8'}}
-          onPress={
-            () => {
-              //console.log(user)
-              changeView('ProfileView')
-              //payPalRequest()
-            }
-          }>
-            Profile
-        </Text>
-      </View>
+      <Button type="solid"
+        buttonStyle={{
+          marginBottom: 20,
+          height: 100,
+          width: 100,
+          borderRadius:200,
+          alignSelf: 'center',
+          alignItems:'center',
+          backgroundColor:getCurentUserColor(),
+        }} 
+        onPress={
+          () => {changeView('ProfileView')}
+        }
+        />
 
       <ScrollView style={styles.taskList}>
         {tasks.map(task => (
