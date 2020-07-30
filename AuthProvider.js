@@ -68,12 +68,19 @@ const AuthProvider = ({children}) => {
     };
 
     const getCurentUserColor = () => {
-      console.log(db[user.identity])
       if (db[user.identity]) {
         return db[user.identity].color || '#00b5b8'
       }
       else
         return '#00b5b8'
+    };
+
+    const getCurentUserPoints = () => {
+      if (db[user.identity]) {
+        return db[user.identity].total_points || 0
+      }
+      else
+        return 0
     };
   
     // Log out the current user.
@@ -99,8 +106,8 @@ const AuthProvider = ({children}) => {
       setView(view);
     };
 
-    const addPoints = (email, points) => {
-      db.email.total_points += points
+    const addPoints = (points) => {
+      db[user.identity].total_points += points
     }
 
     const getRandomInt = () => {
@@ -122,7 +129,8 @@ const AuthProvider = ({children}) => {
           currentView,
           addPoints,
           getCurentUser,
-          getCurentUserColor
+          getCurentUserColor,
+          getCurentUserPoints
         }}>
         {children}
       </AuthContext.Provider>

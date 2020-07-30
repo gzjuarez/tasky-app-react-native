@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Text, ListItem, Overlay} from 'react-native-elements';
 import {Task} from './schemas';
 import {useTasks} from './TasksProvider';
+import {useAuth} from './AuthProvider';
 
 // Action sheet contains a list of actions. Each action should have a `title`
 // string and `action` function property. A "Cancel" action is automatically
@@ -41,6 +42,7 @@ export function TaskItem({task}) {
   // Pull the task actions from the TasksProvider.
 
   const {deleteTask, setTaskStatus} = useTasks();
+  const {addPoints } = useAuth();
 
 
   // The action sheet appears when the user presses an item in the list.
@@ -68,6 +70,7 @@ export function TaskItem({task}) {
 
       action: () => {
         setTaskStatus(task, Task.STATUS_OPEN);
+        addPoints(task.points * -1);
       },
     });
   }
@@ -78,6 +81,7 @@ export function TaskItem({task}) {
 
       action: () => {
         setTaskStatus(task, Task.STATUS_COMPLETE);
+        addPoints(task.points);
       },
     });
   }
