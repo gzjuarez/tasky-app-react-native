@@ -13,6 +13,7 @@ export function AddTaskView() {
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [newTaskName, setNewTaskName] = useState('');
   const [newTaskPoint, setNewTaskPoint] = useState(0);
+  const [cIcon, setCIcon] = useState('cart');
 
   const {createTask} = useTasks();
 
@@ -41,7 +42,7 @@ export function AddTaskView() {
               type='material'
               onPress={() => {
                 setOverlayVisible(false);
-                createTask(newTaskName, newTaskPoint);
+                createTask(newTaskName, newTaskPoint, cIcon);
               }}
               color='#5FD6AB'
             />
@@ -79,19 +80,28 @@ export function AddTaskView() {
           />
           <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
             <Icon
-              name='trash'
+              name='bell'
               type='evilicon'
-              color='#93988f'
+              color={cIcon === 'bell' ? 'black' : '#93988f'}
+              onPress={() => {
+                setCIcon('bell');
+              }}
             />
             <Icon
-              name='restaurant'
-              type='material'
-              color='black'
+              name='cart'
+              type='evilicon'
+              color= {cIcon === 'cart' ? 'black' : '#93988f'}
+              onPress={() => {
+                setCIcon('cart');
+              }}
             />
             <Icon
               name='pencil'
               type='evilicon'
-              color='#93988f'
+              color={cIcon === 'pencil' ? 'black' : '#93988f'}
+              onPress={() => {
+                setCIcon('pencil');
+              }}
             />
           </View>
 
@@ -100,7 +110,7 @@ export function AddTaskView() {
             type="clear"
             onPress={() => {
               setOverlayVisible(false);
-              createTask(newTaskName, newTaskPoint);
+              createTask(newTaskName, newTaskPoint, cIcon);
             }}
           />
         </>

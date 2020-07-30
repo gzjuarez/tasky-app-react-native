@@ -97,7 +97,7 @@ const TasksProvider = ({children, projectId}) => {
 
   // Define our create, update, and delete functions that users of the
   // useTasks() hook can call.
-  const createTask = (newTaskName, newTaskPoint) => {
+  const createTask = (newTaskName, newTaskPoint, icon) => {
     const realm = realmRef.current;
 
     // Open a write transaction.
@@ -113,7 +113,8 @@ const TasksProvider = ({children, projectId}) => {
         new Task({
           name: newTaskName || 'New Task',
           partition: projectId,
-          points: newTaskPoint || 1
+          points: newTaskPoint || 1,
+          icon: icon
         }),
 
       );

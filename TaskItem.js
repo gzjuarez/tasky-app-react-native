@@ -99,7 +99,7 @@ export function TaskItem({task}) {
           setActionSheetVisible(true);
         }}
         title={task.name}
-        containerStyle={{backgroundColor: '#d8d9da'}}
+        containerStyle={{backgroundColor: '#e5e5e5'}}
         titleStyle={
           task.status === Task.STATUS_COMPLETE ? (
               {color: '#93988f'}
@@ -107,8 +107,8 @@ export function TaskItem({task}) {
         }
         leftIcon={
           task.status === Task.STATUS_COMPLETE ? (
-            { name: 'restaurant', type: 'material', color:'#93988f', reverse:false }
-          ) : { name: 'restaurant', type: 'material', color:'#5FD6AB', reverse:false }
+            { name: task.icon, type: 'evilicon', color:'#93988f', reverse:false }
+          ) : { name: task.icon, type: 'evilicon', color:'#5FD6AB', reverse:false }
         }
       />
     </>
