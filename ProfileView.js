@@ -55,7 +55,7 @@ export function ProfileView() {
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#d8d9da',
+      backgroundColor: '#e5e5e5',
       alignItems: "stretch",
       justifyContent: 'flex-start',
       borderRadius:30,

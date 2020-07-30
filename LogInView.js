@@ -128,7 +128,7 @@ const ToggleAuthModeComponent = ({authMode, setAuthMode}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#d8d9da',
+    backgroundColor: '#e5e5e5',
     alignItems: "stretch",
     justifyContent: 'center',
     borderRadius:30,
