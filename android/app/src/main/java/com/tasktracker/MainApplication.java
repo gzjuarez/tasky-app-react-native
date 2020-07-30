@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.smarkets.paypal.RNPaypalPackage;
+import com.smarkets.paypal.RNPaypalPackage;
 import com.sbugert.rnadmob.RNAdMobPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
