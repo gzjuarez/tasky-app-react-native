@@ -5,6 +5,7 @@ import {useAuth} from './AuthProvider';
 import {useTasks} from './TasksProvider';
 import {TaskItem} from './TaskItem';
 import {AddTaskView} from './AddTaskView';
+import {AdMobBanner} from 'react-native-admob';
 
 // The Tasks View displays the list of tasks of the parent TasksProvider.
 // It has a button to log out and a button to add a new task.
@@ -17,6 +18,8 @@ export function TasksView() {
   const {tasks, projectId} = useTasks();
 
 
+  const onFailToRecieveAd = (error) => console.log(error);
+
   return (
     <View style={styles.container}>
       
@@ -24,7 +27,7 @@ export function TasksView() {
       {/* <Text h2>{projectId}</Text> */}
       <View style={styles.myButton1}>
         <Text
-          style={{color:'#00b8'}}
+          style={{color:'#00b5b8'}}
           onPress={
             () => changeView('ProfileView')
           }>
@@ -44,6 +47,11 @@ export function TasksView() {
         <AddTaskView />
         <Button type="clear" title="Log Out" onPress={logOut} />
       </View>
+      <AdMobBanner
+        adSize="Banner"
+        adUnitID="ca-app-pub-3940256099942544/6300978111"
+        didFailToReceiveAdWithError={onFailToRecieveAd}
+      />
     </View>
   );
 }
