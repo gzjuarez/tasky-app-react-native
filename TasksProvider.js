@@ -145,8 +145,18 @@ const TasksProvider = ({children, projectId}) => {
     realm.write(() => {
 
       task.status = status;
+      user.total_points = user.total_points || 0;
+      if (status === Task.STATUS_COMPLETE) {
+        user.total_points += task.points;
+      } else if (status === Task.STATUS_OPEN) {
+        user.total_points -= task.points;
+        if (user.total_points < 0) {
+          user.total_points = 0;
+        }
+      }
 
     });
+    console.log(user)
   };
 
   // Define the function for deleting a task.

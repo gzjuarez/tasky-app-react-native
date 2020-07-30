@@ -6,11 +6,11 @@ import {useTasks} from './TasksProvider';
 import {AdMobBanner} from 'react-native-admob';
 
 export function ProfileView() {
-    const {logOut, changeView} = useAuth();
+    const {logOut, changeView, user} = useAuth();
     const {tasks, projectId} = useTasks();
 
     const onFailToRecieveAd = (error) => console.log(error);
-    
+
     return (
         <View style={styles.container}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -42,7 +42,7 @@ export function ProfileView() {
             <Text style={styles.darkText2}>This are your points!</Text>
           </View>
           <View style={styles.subtitle}>
-            <Text style={styles.points}>35</Text>
+            <Text style={styles.points}>{user.total_points || 0}</Text>
           </View>
           <AdMobBanner
             adSize="Banner"

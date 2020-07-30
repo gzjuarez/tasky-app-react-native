@@ -13,6 +13,15 @@ const AuthContext = React.createContext(null);
 // use the useAuth() hook to access the auth value.
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
+
+    const hardcoded_users = {
+      'd': {
+        'name': '',
+        'total_points': 0,
+        'color': '#'
+      },
+    }
+    let db = {}
   
     // The log in function takes an email and password and uses the Email/Password
     // authentication provider to log in.
@@ -47,6 +56,15 @@ const AuthProvider = ({children}) => {
     const changeView = (view) => {
       setView(view);
     };
+
+    const addUser = (email) => {
+      user = {
+        name: '',
+        total_points: 0,
+        color: '#'
+      }
+      db.email = user;
+    }
   
     return (
       <AuthContext.Provider
@@ -56,7 +74,8 @@ const AuthProvider = ({children}) => {
           registerUser,
           user,
           changeView,
-          currentView
+          currentView,
+          db
         }}>
         {children}
       </AuthContext.Provider>
