@@ -5,6 +5,7 @@ import {useAuth} from './AuthProvider';
 import {LogInView} from './LogInView';
 import {AuthProvider} from './AuthProvider';
 import {TasksProvider} from './TasksProvider';
+import {UsersProvider} from './UsersProvider';
 import {TasksView} from './TasksView';
 import { ProfileView } from './ProfileView';
 
@@ -41,7 +42,6 @@ function AppBody() {
                 :
                 (<ProfileView />)
               }
-              
             </TasksProvider>
           )}
         </View>

@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
 import Realm from 'realm';
 import {useAuth} from './AuthProvider';
-import {Task} from './schemas';
+import {Task, User} from './schemas';
 
 // Create the context that will be provided to descendants of TasksProvider via
 // the useTasks hook.
@@ -13,6 +13,7 @@ const TasksProvider = ({children, projectId}) => {
   
     // The tasks list will contain the tasks in the realm when opened.
     const [tasks, setTasks] = useState([]);
+    const [users, setUsers] = useState([]);
   
     // This realm does not need to be a state variable, because we don't re-render
     // on changing the realm.
@@ -34,13 +35,10 @@ const TasksProvider = ({children, projectId}) => {
     // partition value. This will open a realm that contains all objects where
     // object._partition == projectId.
     const config = {
-      schema: [Task.schema],
+      schema: [Task.schema, User.schema],
       sync: {
-
         user,
-
         partitionValue: projectId,
-
       },
     };
 
@@ -70,11 +68,14 @@ const TasksProvider = ({children, projectId}) => {
         // configuration above, the realm only contains tasks where
         // task._partition == projectId.
         const syncTasks = openedRealm.objects('Task');
+        const syncUsers = openedRealm.objects('User');
+        console.log(syncUsers)
 
         // Watch for changes to the tasks collection.
         openedRealm.addListener('change', () => {
           // On change, update the tasks state variable and re-render.
           setTasks([...syncTasks]);
+          setUsers([...syncUsers]);
         });
 
         // Set the tasks state variable and re-render.
@@ -100,7 +101,7 @@ const TasksProvider = ({children, projectId}) => {
 
   // Define our create, update, and delete functions that users of the
   // useTasks() hook can call.
-  const createTask = (newTaskName) => {
+  const createTask = (newTaskName, newTaskPoint) => {
     const realm = realmRef.current;
 
     // Open a write transaction.
@@ -113,7 +114,11 @@ const TasksProvider = ({children, projectId}) => {
 
         'Task',
 
-        new Task({name: newTaskName || 'New Task', partition: projectId}),
+        new Task({
+          name: newTaskName || 'New Task',
+          partition: projectId,
+          points: newTaskPoint || 1
+        }),
 
       );
 
@@ -142,7 +147,6 @@ const TasksProvider = ({children, projectId}) => {
       task.status = status;
 
     });
-
   };
 
   // Define the function for deleting a task.
@@ -166,14 +170,11 @@ const TasksProvider = ({children, projectId}) => {
       value={{
 
         createTask,
-
         deleteTask,
-
         setTaskStatus,
-
         tasks,
-
         projectId,
+        users,
 
       }}>
 

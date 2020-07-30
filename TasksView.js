@@ -6,17 +6,60 @@ import {useTasks} from './TasksProvider';
 import {TaskItem} from './TaskItem';
 import {AddTaskView} from './AddTaskView';
 import {AdMobBanner} from 'react-native-admob';
+import { paymentRequest } from 'react-native-paypal';
 
 // The Tasks View displays the list of tasks of the parent TasksProvider.
 // It has a button to log out and a button to add a new task.
 export function TasksView() {
   // Get the logOut function from the useAuth hook.
-  const {logOut, changeView} = useAuth();
+  const {logOut, changeView, user} = useAuth();
 
   // Get the list of tasks and the projectId from the useTasks hook.
 
   const {tasks, projectId} = useTasks();
 
+
+  const payPalRequest1 = async () => {
+    try {
+      const {
+        nonce,
+        payerId,
+        email,
+        firstName,
+        lastName,
+        phone 
+      } = await requestOneTimePayment(
+        'A21AAFsR6onkFqbQBDHuriTSL_Y13ZezwU81S8aOwpds7TTj82sgbdcMwLHlkbHr2w4TcrddOECkJOUmBNTlwVIbz2_kZCevQ',
+        {
+          amount: '5', // required
+          // any PayPal supported currency (see here: https://developer.paypal.com/docs/integration/direct/rest/currency-codes/#paypal-account-payments)
+          currency: 'MX',
+          // any PayPal supported locale (see here: https://braintree.github.io/braintree_ios/Classes/BTPayPalRequest.html#/c:objc(cs)BTPayPalRequest(py)localeCode)
+          localeCode: 'es_MX', 
+          shippingAddressRequired: false,
+          userAction: 'commit', // display 'Pay Now' on the PayPal review page
+          // one of 'authorize', 'sale', 'order'. defaults to 'authorize'. see details here: https://developer.paypal.com/docs/api/payments/v1/#payment-create-request-body
+          intent: 'authorize', 
+        }
+      );
+    } catch (e) {
+      console.log(e)
+    }
+  };
+
+  const payPalRequest = () => {
+    console.log('hey')
+    paymentRequest({
+      clientId: 'Aba9TT2hvg19sTsqy-DYAWaTwoW6Qtx7uk8C-x8fGGO94YZBMHDVK4UIRqkPZZmmNphmdYv_xexTJiju',
+      environment: 0,
+      price: '20.00',
+      currency: 'MX',
+      description: 'PayPal Test'
+    }).then((confirm, payment) => {
+      console.log('Paid');
+    })
+    .catch((error_code) => console.error('Failed to pay through PayPal'));
+  }
 
   const onFailToRecieveAd = (error) => console.log(error);
 
@@ -29,7 +72,11 @@ export function TasksView() {
         <Text
           style={{color:'#00b5b8'}}
           onPress={
-            () => changeView('ProfileView')
+            () => {
+              //console.log(user)
+              changeView('ProfileView')
+              //payPalRequest()
+            }
           }>
             Profile
         </Text>

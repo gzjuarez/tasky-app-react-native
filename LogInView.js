@@ -70,7 +70,7 @@ const ToogleFamilyMembers = ({authMode, setAuthMode}) => {
       <View style={styles.myButtonG}>
         <View style={styles.myButton1}></View>
         <View style={styles.myButton2}></View>
-        
+        <View style={styles.myButton3}></View>
       </View>
       </>
     );
@@ -121,19 +121,23 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection:'row',
     marginTop:40,
+    fontFamily: 'sans-serif-light'
   },
   darkText:{
     color:"#000000",
-    fontSize:20,
+    fontSize:30,
+    fontFamily: 'sans-serif-light'
   },
   lightText:{
     color:"#93988f",
-    fontSize:20,
+    fontSize:30,
+    fontFamily: 'sans-serif-light'
   },
   loginText:{
     color:"#000000",
     fontSize:20,
     flexDirection:'row',
+    fontFamily: 'sans-serif-light'
   },
   myButtonG:{
     flex:4,
@@ -157,5 +161,11 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius:200,
     backgroundColor:'#f7c035',
-  }
+  },
+  myButton3:{
+    height: 100,
+    width: 100,  //The Width must be the same as the height
+    borderRadius:200, //Then Make the Border Radius twice the size of width or Height
+    backgroundColor:'#00b8',
+  },
 });

@@ -22,6 +22,7 @@ const AuthProvider = ({children}) => {
       const newUser = await app.logIn(creds);
       setUser(newUser);
       console.log(`Logged in as ${newUser.identity}`);
+      console.log(newUser)
     };
   
     // Log out the current user.

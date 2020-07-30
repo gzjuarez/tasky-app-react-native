@@ -6,11 +6,13 @@ class Task {
     partition,
     status = Task.STATUS_OPEN,
     id = new ObjectId(),
+    points,
   }) {
     this._partition = partition;
     this._id = id;
     this.name = name;
     this.status = status;
+    this.points = points;
   }
 
   static STATUS_OPEN = 'Open';
@@ -24,9 +26,35 @@ class Task {
       _partition: 'string',
       name: 'string',
       status: 'string',
+      points: 'int',
     },
     primaryKey: '_id',
   };
 }
 
-export {Task};
+class User {
+  constructor({
+    name,
+    partition,
+    id = new ObjectId(),
+    total_points,
+  }) {
+    this._partition = partition;
+    this._id = id;
+    this.name = name;
+    this.total_points = total_points;
+  }
+
+  static schema = {
+    name: 'User',
+    properties: {
+      _id: 'objectId',
+      _partition: 'string',
+      name: 'string',
+      points: 'int',
+    },
+    primaryKey: '_id',
+  };
+}
+
+export {Task, User};

@@ -12,6 +12,7 @@ import {useTasks} from './TasksProvider';
 export function AddTaskView() {
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [newTaskName, setNewTaskName] = useState('');
+  const [newTaskPoint, setNewTaskPoint] = useState(0);
 
   const {createTask} = useTasks();
 
@@ -37,7 +38,7 @@ export function AddTaskView() {
               type='material'
               onPress={() => {
                 setOverlayVisible(false);
-                createTask(newTaskName);
+                createTask(newTaskName, newTaskPoint);
               }}
             />
           </View>
@@ -47,7 +48,7 @@ export function AddTaskView() {
               
           <View style={{alignItems: 'center', margin:25}}>
             <NumericInput
-              onChange={value => console.log(value)}
+              onChange={value => setNewTaskPoint(value)}
               rounded
               textColor='#59656F'
               iconStyle={{ color: 'white' }}
@@ -101,7 +102,7 @@ export function AddTaskView() {
             type="clear"
             onPress={() => {
               setOverlayVisible(false);
-              createTask(newTaskName);
+              createTask(newTaskName, newTaskPoint);
             }}
           />
         </>
