@@ -18,6 +18,18 @@ const AuthProvider = ({children}) => {
         'email': 'gerajuarez@itesm.mx',
         'total_points': 4,
         'color': '#9cc9ad'
+      },
+      '5f22edfbe08f6af1b528d50d': {
+        'name': 'fernandaz',
+        'email': 'fernandaz@mail.com',
+        'total_points': 10,
+        'color': '#f7c035'
+      },
+      '5f22ee56b22a2a77f9931cd4': {
+        'name': 'juanner',
+        'email': 'juanner@gmail.com',
+        'total_points': 5,
+        'color': '#a4cafd'
       }
     }  
     const [user, setUser] = useState(null);
