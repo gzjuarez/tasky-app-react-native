@@ -13,15 +13,17 @@ const AuthContext = React.createContext(null);
 // use the useAuth() hook to access the auth value.
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
+    const [db, setDB] = useState({});
 
+    const hd_colors = ['#00b5b8', '#f7c035', '#00b8']
     const hardcoded_users = {
       'd': {
         'name': '',
+        'email': '',
         'total_points': 0,
         'color': '#'
       },
     }
-    let db = {}
   
     // The log in function takes an email and password and uses the Email/Password
     // authentication provider to log in.
@@ -31,7 +33,21 @@ const AuthProvider = ({children}) => {
       const newUser = await app.logIn(creds);
       setUser(newUser);
       console.log(`Logged in as ${newUser.identity}`);
-      console.log(newUser)
+
+      let newDB = db;
+      let createdUser = {
+        name: email.split('@')[0],
+        email: email,
+        total_points: 0,
+        color: hd_colors[getRandomInt()]
+      }
+      newDB[newUser.identity] = createdUser;
+      setDB(newDB)
+      //console.log('hey')
+    };
+
+    const getCurentUser = () => {
+      return db[user.identity].name
     };
   
     // Log out the current user.
@@ -57,13 +73,16 @@ const AuthProvider = ({children}) => {
       setView(view);
     };
 
-    const addUser = (email) => {
-      user = {
-        name: '',
-        total_points: 0,
-        color: '#'
-      }
-      db.email = user;
+    const addPoints = (email, points) => {
+      db.email.total_points += points
+    }
+
+    const getRandomInt = () => {
+      min = 0;
+      max = 2;
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
     }
   
     return (
@@ -75,7 +94,8 @@ const AuthProvider = ({children}) => {
           user,
           changeView,
           currentView,
-          db
+          addPoints,
+          getCurentUser
         }}>
         {children}
       </AuthContext.Provider>

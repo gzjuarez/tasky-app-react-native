@@ -6,7 +6,7 @@ import {useTasks} from './TasksProvider';
 import {AdMobBanner} from 'react-native-admob';
 
 export function ProfileView() {
-    const {logOut, changeView, user} = useAuth();
+    const {logOut, changeView, user, getCurentUser} = useAuth();
     const {tasks, projectId} = useTasks();
 
     const onFailToRecieveAd = (error) => console.log(error);
@@ -23,7 +23,16 @@ export function ProfileView() {
               }}
             />
           </View>
-          <View style={styles.myButton1}>
+          <View style={{
+            height: 150,
+            width: 150,
+            borderRadius:300, 
+            backgroundColor: '#00b5b8',//getCurentUser(),
+            alignSelf: 'center',
+            marginTop: 40,
+            justifyContent:'center',
+            alignItems:'center',
+          }}>
             <Text
               style={{color:'#00b5b8'}}
               onPress={
@@ -36,7 +45,7 @@ export function ProfileView() {
           </View>
           <View style={styles.title}>
             <Text style={styles.darkText}>Hi </Text>
-            <Text style={styles.lightText}>Nombre!</Text>
+            <Text style={styles.lightText}>{getCurentUser()}!</Text>
           </View>
           <View style={styles.subtitle}>
             <Text style={styles.darkText2}>This are your points!</Text>
